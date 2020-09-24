@@ -1,0 +1,29 @@
+{
+	"id": "64e87eb4-bfe1-449e-8e77-040823bb7bbf",
+	"values": [
+		{
+			"key": "password",
+			"value": "Demo123!",
+			"enabled": true
+		},
+		{
+			"key": "apiUsername",
+			"value": "admin@demo.io",
+			"enabled": true
+		},
+		{
+			"key": "authToken",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "tdmUserName",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"name": "My Workspace Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2020-09-21T15:28:41.697Z",
+	"_postman_exported_using": "Postman/7.32.0"
+}

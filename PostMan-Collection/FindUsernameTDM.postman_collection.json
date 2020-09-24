@@ -1,0 +1,117 @@
+{
+	"info": {
+		"_postman_id": "310bc17f-03c9-46ca-86a7-765ddbc1a439",
+		"name": "FindUsernameTDM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Digital Bank - Find User By Username - TDM Copy",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "9dd1e984-c0ba-40ef-9929-f74586f55ab3",
+						"exec": [
+							"// Get Digital Bank Admin API Credentials ",
+							"let baseURL = pm.environment.get(\"baseUrl\");",
+							"let adminAPIUser = pm.globals.get(\"apiUsername\");",
+							"let adminAPIPwd = pm.globals.get(\"password\");",
+							"",
+							"//AuthenticateUser Request",
+							"const authEndPoint = {",
+							"  'method': 'POST',",
+							"  'url': baseURL + \"/api/v1/auth?username=\" + adminAPIUser + \"&password=\" + adminAPIPwd,",
+							"  'header': {",
+							"  'Authorization': \"Basic\"",
+							"  }",
+							"};",
+							"",
+							"// Request Token",
+							"pm.sendRequest(authEndPoint, function (err, res) {",
+							"    ",
+							"if (err) throw new Error(err);",
+							"    ",
+							"const response = res.json();",
+							"pm.globals.set(\"authToken\", response.authToken);",
+							"",
+							"}); // end Request Token pm.sendRequest"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ae7fb719-e419-4933-9def-c8d1e305f87f",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const response = pm.response.json();",
+							"",
+							"pm.test(\"Valid User should be found from TDM\", function () {",
+							"    pm.expect(response.username).to.eql(pm.globals.get(\"tdmUserName\"));",
+							"    pm.expect(response.accountNonExpired).to.eql(true);",
+							"    pm.expect(response.enabled).to.eql(true);",
+							"    pm.expect(response.accountNonLocked).to.eql(true);",
+							"});",
+							"",
+							"// //Parse Response and use for the Create Savings Account Request",
+							"// pm.globals.set(\"username\", response.username);",
+							"// pm.globals.set(\"profileId\",response.id);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/v1/user/find?username={{tdmUserName}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"user",
+						"find"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{tdmUserName}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
