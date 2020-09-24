@@ -1,2 +1,2 @@
 # ard-apiTesting
-framework to automate API with TDM and Postman
+Framework to automate API Tests with Broadcom ARD TDM and Postman
