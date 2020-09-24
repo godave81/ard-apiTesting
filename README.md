@@ -3,7 +3,7 @@ Framework to automate API Tests with Broadcom ARD TDM and Postman
 
 #Depedencies
 Download latest Node JS https://nodejs.org/en/download/
-Download latest Postman Desktop https://www.postman.com/downloads/
+Download latest Postman Desktop https://www.postman.com/downloads/ and Newman CLI https://www.npmjs.com/package/newman
 Download Broadcom TDM 4.8 or higher
 Download Broadcom ARD 3.0 or higher
 
